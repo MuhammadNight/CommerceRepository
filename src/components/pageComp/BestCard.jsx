@@ -3,7 +3,7 @@ import { createSlug } from "../../utils/createSlug";
 import { useEffect, useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
-const NewCard = ({ item }) => {
+const NewCard = ({ item}) => {
   if (item.bestseller) {
     const slug = createSlug(item.name, item.id);
     let linkPath;

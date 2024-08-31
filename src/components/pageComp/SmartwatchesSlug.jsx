@@ -1,4 +1,4 @@
-import { AiFillAndroid } from "react-icons/ai"; 
+import { AiFillAndroid } from "react-icons/ai";
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -84,9 +84,9 @@ const SmartwatchesSlug = () => {
                 <div className="w-full lg:w-1/2 mt-6 lg:mt-0 lg:ml-8 flex flex-col">
                     <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold">{product?.name}</h1>
                     <div className="flex items-center mt-4">
-                        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">{product?.price}</span>
+                        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">{"$"}{product?.price}</span>
                         <span className="ml-2 text-gray-500 line-through text-sm sm:text-base">
-                            {product?.price + ",99"}
+                            {"$"}{product?.price + ",99"}
                         </span>
                     </div>
 

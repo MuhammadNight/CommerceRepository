@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 const NewCard = ({ item }) => {
-  if (item.newProduct) {
+
+  if (item?.newProduct) {
     const slug = createSlug(item.name, item.id);
     let linkPath;
 
@@ -12,14 +13,12 @@ const NewCard = ({ item }) => {
     const [cart, setCart] = useState([]);
     const navigate = useNavigate();
 
-
     useEffect(() => {
       const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
       const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
       setFavorites(storedFavorites);
       setCart(storedCart);
     }, []);
-
 
     const handleFavoriteToggle = (item) => {
       const updatedFavorites = favorites.some(fav => fav.id === item.id)
@@ -30,20 +29,18 @@ const NewCard = ({ item }) => {
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     };
 
-
     const handleCartToggle = (item) => {
       const isInCart = cart.some(cartItem => cartItem.id === item.id);
 
       if (isInCart) {
-
         navigate('/cart');
       } else {
-
         const updatedCart = [...cart, item];
         setCart(updatedCart);
         localStorage.setItem('cart', JSON.stringify(updatedCart));
       }
     };
+
     const isFavorite = favorites.some(fav => fav.id === item.id);
     const isInCart = cart.some(cartItem => cartItem.id === item.id);
 

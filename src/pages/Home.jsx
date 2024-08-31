@@ -1,3 +1,4 @@
+import { CgSpinner } from "react-icons/cg"; 
 import React, { useRef } from 'react';
 import { AiOutlineFileImage, AiOutlineCamera } from 'react-icons/ai';
 import { GiSmartphone } from 'react-icons/gi';
@@ -142,7 +143,7 @@ const Home = () => {
                         {Array(8).fill().map((_, index) => (
                             <div key={index} className="bg-gray-300 w-full h-[300px] lg:h-[432px] animate-pulse">
                                 <span className="text-[60px] lg:text-[114px] flex justify-center items-center translate-y-[130px]">
-                                    <AiOutlineFileImage />
+                                    <span className="animate-spin"><CgSpinner /></span>
                                 </span>
                             </div>
                         ))}
