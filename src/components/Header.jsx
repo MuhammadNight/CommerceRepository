@@ -18,6 +18,7 @@ const Header = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [products, setProducts] = useState([]);
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [isSearchFocused, setIsSearchFocused] = useState(false);
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -65,18 +66,19 @@ const Header = () => {
         <header className="bg-white relative">
             <Sidebar isOpen={isSidebarOpen} />
 
-            <div className="flex justify-between md:justify-between items-center px-[20px] py-[20px] md:px-[160px] md:py-4 mx-auto">
+            <div className="flex justify-between items-center px-[20px] py-[20px] md:px-[160px] md:py-4 mx-auto">
                 <NavLink to="/" className="flex-shrink-0">
                     <img src={Logo} alt="Cyber Logo" className="w-24 h-7 cursor-pointer" />
                 </NavLink>
 
-
-                <div className="relative flex-1 mx-8 mt-4 md:mt-0 flex items-center">
+                <div className={`relative flex-1 mx-8 mt-4 md:mt-0 flex items-center transition-all duration-300 ${isSearchFocused ? 'sm:w-full' : ''}`}>
                     <AiOutlineSearch className="absolute left-3 text-[23px] text-[#989898]" />
                     <input
                         type="text"
                         value={searchTerm}
                         onChange={handleSearchChange}
+                        onFocus={() => setIsSearchFocused(true)}
+                        onBlur={() => setIsSearchFocused(false)}
                         placeholder="Search"
                         className="bg-gray-200 rounded-md p-2 pl-10 w-full"
                     />
@@ -181,13 +183,12 @@ const Header = () => {
                     </button>
                 </div>
                 <button
-                    className="md:block lg:hidden text-[20px] ml-4 mt-4"
+                    className={`md:block lg:hidden text-[20px] ml-4 mt-4 ${isSearchFocused ? 'hidden sm:block' : ''}`}
                     onClick={() => dispatch(toggleSidebar())}
                 >
                     <AiOutlineMenu />
                 </button>
             </div>
-
 
             <div className="bg-[#2e2e2e] text-[#979797] hidden lg:flex">
                 <div className="flex justify-between space-x-4 p-2 px-[100px] py-[8px] mx-auto max-w-[1400px]">
@@ -252,6 +253,17 @@ const Header = () => {
                     </NavLink>
                 </div>
             </div>
+
+            <style jsx>{`
+                @media (max-width: 640px) {
+                    .transition-all {
+                        width: ${isSearchFocused ? '100%' : 'auto'};
+                    }
+                    .md\\:block {
+                        display: ${isSearchFocused ? 'none' : 'block'};
+                    }
+                }
+            `}</style>
         </header>
     );
 };
