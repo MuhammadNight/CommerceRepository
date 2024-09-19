@@ -21,21 +21,23 @@ const NewCard = ({ item }) => {
     }, []);
 
     const handleFavoriteToggle = (item) => {
-      const updatedFavorites = favorites.some(fav => fav.id === item.id)
-        ? favorites.filter(fav => fav.id !== item.id)
-        : [...favorites, item];
+      const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+      const updatedFavorites = storedFavorites.some(fav => fav.id === item.id)
+        ? storedFavorites.filter(fav => fav.id !== item.id)
+        : [...storedFavorites, item];
 
       setFavorites(updatedFavorites);
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     };
 
     const handleCartToggle = (item) => {
-      const isInCart = cart.some(cartItem => cartItem.id === item.id);
+      const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+      const isInCart = storedCart.some(cartItem => cartItem.id === item.id);
 
       if (isInCart) {
         navigate('/cart');
       } else {
-        const updatedCart = [...cart, item];
+        const updatedCart = [...storedCart, item];
         setCart(updatedCart);
         localStorage.setItem('cart', JSON.stringify(updatedCart));
       }
